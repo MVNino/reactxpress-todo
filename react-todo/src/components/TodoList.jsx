@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Modal from "./Modal";
+// import TodoShow from "./TodoShow";
+// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -16,45 +17,35 @@ const TodoList = () => {
     fetchTasks();
   }, []);
 
-  console.log("tasks : ", tasks);
-
   return (
-    <>
-      <h1>TASKS</h1>
-
-      {tasks.length ? (
+    <div className="cards">
+      {tasks?.length ? (
         <>
-          <div className="container flex ml-10 mt-10 justify-start">
-            <Modal buttonLabel="Add Task" />
-          </div>
+          {tasks.map((task) => (
+            <>
+              <div className="card-item">
+                <p className="card-heading">{task.name}</p>
+                <p className="card-content">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Deserunt, molestias.
+                </p>
 
-          <div className="flex flex-wrap sm:justify-around md:justify-start md:px-3 md:mx-3">
-            {tasks.map((task) => (
-              <div
-                key={task.id}
-                className="mx-2 my-4 max-w-xs overflow-hidden rounded-lg bg-white shadow-lg"
-              >
-                <div className="px-6 py-4">
-                  <h2
-                    className="text-xl font-semibold text-gray-800"
-                    onClick={() => {
-                      console.log("double clicked!");
-                    }}
-                  >
-                    {task.name}
-                  </h2>
-                </div>
-                <div className="px-6 py-4">
-                  <Modal buttonLabel="Update Task" task={task} />
+                <div className="flex justify-center">
+                  {/* <Link to={`/tasks/${task.id}`} /> */}
+                  <a href="#" className="button-primary text-decoration-none">
+                    View more
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
+
+                {/* <Route exact path={`/tasks/${task.id}`} component={TodoShow} /> */}
+            </>
+          ))}
         </>
       ) : (
-        <div>No tasks.</div>
+        <>No tasks</>
       )}
-    </>
+    </div>
   );
 };
 
